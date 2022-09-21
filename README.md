@@ -3,6 +3,8 @@
 ## Requirements
 - To execute program you need have Golang 1.17 or newer and Docker instaled
 
+### Database Diagram
+<img width="520" alt="image" src="https://user-images.githubusercontent.com/45875644/191430234-d5dd5d03-6a74-43f3-9dbb-bca78fb12940.png">
 
 ### MakeFile
 - Use Make commands to start apps easily:
