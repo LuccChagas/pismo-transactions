@@ -1,0 +1,160 @@
+basePath: /
+definitions:
+  errs.Handling:
+    properties:
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  models.Account:
+    properties:
+      accountID:
+        type: integer
+      document_number:
+        type: string
+    type: object
+  models.Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.Transaction:
+    properties:
+      account_id:
+        type: integer
+      amount:
+        type: number
+      event_date:
+        type: string
+      operation_type_id:
+        type: integer
+      transaction_id:
+        type: integer
+    type: object
+info:
+  contact:
+    email: luccaa.chagas23@gmail.com
+    name: Luccas Machado
+    url: https://www.linkedin.com/in/luccas-machado-das-chagas-ab5897105/
+  description: API Documentation
+  title: Pismo-Transactions Swagger API
+  version: "1.0"
+paths:
+  /account:
+    post:
+      consumes:
+      - application/json
+      description: POST models.Account
+      parameters:
+      - description: Account
+        in: body
+        name: Account
+        required: true
+        schema:
+          $ref: '#/definitions/models.Account'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errs.Handling'
+      summary: Create new Account
+      tags:
+      - Accounts
+  /account:id:
+    get:
+      consumes:
+      - application/json
+      description: GET models.Account
+      parameters:
+      - description: Account ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Account'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errs.Handling'
+      summary: Get Account By ID
+      tags:
+      - Accounts
+  /auth:
+    post:
+      consumes:
+      - application/json
+      description: POST models.Login
+      parameters:
+      - description: Login
+        in: body
+        name: Login
+        required: true
+        schema:
+          $ref: '#/definitions/models.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errs.Handling'
+      summary: Auth Login
+      tags:
+      - Auth
+  /health_check/:
+    get:
+      description: Check if server is running
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Health Check Endpoint
+      tags:
+      - Health
+  /transaction:
+    post:
+      consumes:
+      - application/json
+      description: POST models.Transaction
+      parameters:
+      - description: Transaction
+        in: body
+        name: Transaction
+        required: true
+        schema:
+          $ref: '#/definitions/models.Transaction'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errs.Handling'
+      summary: Create new Transaction
+      tags:
+      - transaction
+swagger: "2.0"
