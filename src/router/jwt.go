@@ -23,6 +23,15 @@ var Config = middleware.JWTConfig{
 	SigningKey: []byte("secret"),
 }
 
+// @Summary      Auth Login
+// @Description  POST models.Login
+// @Tags         Auth
+// @Accept       json
+// @Produce      json
+// @Param        Login   body     models.Login  true  "Login"
+// @Success      200  {object}	string
+// @Failure      400  {object}  errs.Handling
+// @Router       /auth [post]
 func Auth(c echo.Context) error {
 	utils.LoadEnv()
 	login := new(models.Login)
@@ -59,4 +68,15 @@ func Auth(c echo.Context) error {
 	return c.JSON(http.StatusOK, echo.Map{
 		"token": t,
 	})
+}
+
+// @Summary      Health Check Endpoint
+// @Description  Check if server is running
+// @Tags         Health
+// @Produce      json
+// @Success      200
+// @Failure      500
+// @Router       /health_check/ [get]
+func HealthCheck(c echo.Context) error {
+	return c.JSON(http.StatusOK, "Server Avalible!")
 }
